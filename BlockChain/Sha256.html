@@ -44,10 +44,11 @@
 
 	.tab button {
     	border-bottom-style: solid;
-    	border-top-style: solid;
-    	border-right-style: solid;
-    	border-left-style: solid;
-    	border-color: black;
+    	border-bottom-width: 3px;
+    	border-top-style: none;
+    	border-right-style: none;
+    	border-left-style: none;
+    	border-color: red;
     	background-color: #000000;
     	color: #ffffff;
     	float: left;
@@ -65,7 +66,7 @@
 	}
 
 	.tab button.active {
- 		border-bottom-color: red;
+ 		border-bottom-color: #00ee00;
 	}
 
 	.tabcontent {
@@ -78,10 +79,10 @@
 
 </head>
 
-<body>
+<body onload = "defaultOpen()">
 
 	<div class = "tab">
-		<button class="tablinks" onclick="openTab(event, 'Introduction')">Introduction</button>
+		<button class="tablinks" id = "defaultOpen" onclick="openTab(event, 'Introduction')">Introduction</button>
   		<button class="tablinks" onclick="openTab(event, 'sha256')">Hash</button>
   		<button class="tablinks" onclick="openTab(event, 'block')">Block</button>
   		<button class="tablinks" onclick="openTab(event, 'blockchain')">BlockChain</button>

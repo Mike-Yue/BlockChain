@@ -290,6 +290,10 @@ function mine(id){
 
 }
 
+function defaultOpen(){
+    document.getElementById("defaultOpen").click();
+}
+
 function openTab(event, id) {
     // Declare all variables
     var i, tabcontent, tablinks;
