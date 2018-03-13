@@ -109,10 +109,13 @@ function edit(){
     var x = document.getElementById("form1");
     var text = x.elements[0].value;
     var output = SHA256(text);
-    document.getElementById("hashed result").innerHTML = output;
+    document.getElementById("hashed result").innerHTML = "Hash is: " + output;
     document.getElementById("form1").elements[0].style.borderColor = "green";  
 }
 
+function checkHash(){
+    document.getElementById("form1").elements[0].style.borderColor = "red";
+}
 function checkBlockHash(){
     document.getElementById("form2").elements[0].style.borderColor = "red";
     document.getElementById("form2").elements[1].style.borderColor = "red";
@@ -285,4 +288,25 @@ function mine(id){
     }
 
 
+}
+
+function openTab(event, id) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace("active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the button that opened the tab
+    document.getElementById(id).style.display = "block";
+    event.currentTarget.className += " active";
 }

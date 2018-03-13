@@ -6,12 +6,7 @@
 	<script src="hash.js"></script>
 	<script src="practice.js"></script>
 	<style>
-	#inputfields{
-		width: 100%;
-		padding: 12px 20px;
-		margin: 8px 0;
-		box-sizing: border-box;
-	}
+
 	textarea{
 		height: 200px;
 		width: 50%;
@@ -32,9 +27,7 @@
 	.inline-txtarea{
 		resize: none;
 		height: 200px;
-		width: 100%;
-		align-self: flex-end;
-		vertical-align: top;
+		width: 50%;
 	}
 
 	.inline-field{
@@ -42,30 +35,80 @@
 		vertical-align: top;
 	}
 
+	.tab {
+    	overflow: hidden;
+    	border: 1px solid #ccc;
+    	background-color: #f1f1f1;
+    	
+	}
+
+	.tab button {
+    	border-bottom-style: solid;
+    	border-top-style: solid;
+    	border-right-style: solid;
+    	border-left-style: solid;
+    	border-color: black;
+    	background-color: #000000;
+    	color: #ffffff;
+    	float: left;
+    	outline: none;
+    	cursor: pointer;
+    	padding: 14px 16px;
+    	transition: 0.3s;
+    	width: 25%;
+
+
+	}
+
+	.tab button:hover {
+    	background-color: #008b00;
+	}
+
+	.tab button.active {
+ 		border-bottom-color: red;
+	}
+
+	.tabcontent {
+    	display: none;
+    	padding: 6px 12px;
+    	border-top: none;
+	}
 
 	</style>
 
 </head>
 
 <body>
-	<h1> BlockChain Implementation</h1>
-	<ul>
-		<li><a href = "#sha256"> Hashing </a></li>
-		<li><a href = "#block">Block</a></li>
-		<li><a href = "#blockchain">BlockChain</a></li>
-	</ul>
 
-	<div id = "sha256">
+	<div class = "tab">
+		<button class="tablinks" onclick="openTab(event, 'Introduction')">Introduction</button>
+  		<button class="tablinks" onclick="openTab(event, 'sha256')">Hash</button>
+  		<button class="tablinks" onclick="openTab(event, 'block')">Block</button>
+  		<button class="tablinks" onclick="openTab(event, 'blockchain')">BlockChain</button>
+	</div>
+
+	<h1> BlockChain Implementation</h1>
+
+	<div id = "Introduction" class = "tabcontent">
+		<h2> Group 11 Amazon GO Store Sprint 1 </h2>
+
+		<div id = "overview">
+			<p>This is the demo for Sprint 1, demonstrating the proof of concept for implementation of a blockchain. The blockchain will serve as a record of purchase, with 1 block per purchase per individual customer. One chain, the master chain, will be kept on the company server. Other chains will be distributed to each customer. This distribution ensures accuracy of transactions. </p>
+			<a href = "https://github.com/Mike-Yue/BlockChain" target = "_blank">GitHub Source Code</a>
+		</div>
+	</div>
+
+	<div id = "sha256" class = "tabcontent">
 		<h2> SHA256 Hash</h2>
 		<form id = "form1">
 			Input: <br>
-			<textarea></textarea>
+			<textarea oninput = "checkHash()"></textarea>
 		</form>
 		<p id = "hashed result"></p>
 		<button type = "button" onclick = "edit()">Hash!</button>
 	</div>
 
-	<div id = "block">
+	<div id = "block" class = "tabcontent">
 		<h2> Block </h2>
 		<form id = "form2">
 			Block Number: <br>
@@ -78,14 +121,13 @@
 		<button id = "block0" type = "button" onclick = "mine(this.id)">Mine!</button>
 	</div>
 
-	<div id = "blockchain">
+	<div id = "blockchain" class = "tabcontent">
 		<h2> BlockChain </h2>
-		<div id = "inputfields">
 			<form id = "form3">
 				<div class ="inline-div">
-					Block Number: 
+					Block Number: <br>
 					<input type = "number" oninput = "checkBlockChain0()"> <br>
-					Block data:
+					Block data: <br>
 					<textarea class ="inline-txtarea" oninput = "checkBlockChain0()"></textarea>
 					<p class = "inline-field" id = "nonce0">Nonce Value is: 0</p>
 					<p class = "inline-field" id = "hash0prev"></p>
@@ -95,9 +137,9 @@
 				</div>
 
 				<div class = "inline-div">
-					Block Number: 
+					Block Number: <br>
 					<input type = "number" oninput = "checkBlockChain1()"> <br>
-					Block data: 
+					Block data: <br>
 					<textarea class = "inline-txtarea" oninput = "checkBlockChain1()"></textarea>
 					<p class = "inline-field" id = "nonce1">Nonce Value is: 0</p>
 					<p class = "inline-field" id = "hash1prev"></p>
@@ -107,9 +149,9 @@
 				</div>
 
 				<div class = "inline-div">
-					Block Number: 
+					Block Number: <br>
 					<input type = "number" oninput = "checkBlockChain2()"> <br>
-					Block data: 
+					Block data: <br>
 					<textarea class = "inline-txtarea" oninput = "checkBlockChain2()"></textarea>
 					<p class = "inline-field" id = "nonce2">Nonce Value is: 0</p>
 					<p class = "inline-field" id = "hash2prev"></p>
@@ -119,9 +161,9 @@
 				</div>
 
 				<div class = "inline-div">
-					Block Number: 
+					Block Number: <br>
 					<input type = "number" oninput = "checkBlockChain3()"> <br>
-					Block data: 
+					Block data: <br>
 					<textarea class = "inline-txtarea" oninput = "checkBlockChain3()"></textarea>
 					<p class = "inline-field" id = "nonce3">Nonce Value is: 0</p>
 					<p class = "inline-field" id = "hash3prev"></p>
@@ -132,8 +174,6 @@
 
 			</form>
 		</div>
-
-	</div>
 
 </body>
 </html>
