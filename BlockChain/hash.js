@@ -110,4 +110,179 @@ function edit(){
     var text = x.elements[0].value;
     var output = SHA256(text);
     document.getElementById("hashed result").innerHTML = output;
+    document.getElementById("form1").elements[0].style.borderColor = "green";  
+}
+
+function checkBlockHash(){
+    document.getElementById("form2").elements[0].style.borderColor = "red";
+    document.getElementById("form2").elements[1].style.borderColor = "red";
+
+}
+
+function checkBlockChain0(){
+    var form = document.getElementById("form3");
+    form.elements[0].style.borderColor = "red";
+    form.elements[1].style.borderColor = "red";
+    form.elements[3].style.borderColor = "red";
+    form.elements[4].style.borderColor = "red";
+    form.elements[6].style.borderColor = "red";
+    form.elements[7].style.borderColor = "red";
+    form.elements[9].style.borderColor = "red";
+    form.elements[10].style.borderColor = "red";
+
+    var blockNumber = form.elements[0].value;
+    var nonceVal = document.getElementById("nonce0").innerHTML;
+    var data = form.elements[1].value;
+    document.getElementById("currentHash0").innerHTML = "Live Hash is: " + SHA256(blockNumber.concat(nonceVal).concat(data));
+}
+
+function checkBlockChain1(){
+    var form = document.getElementById("form3");
+    form.elements[3].style.borderColor = "red";
+    form.elements[4].style.borderColor = "red";
+    form.elements[6].style.borderColor = "red";
+    form.elements[7].style.borderColor = "red";
+    form.elements[9].style.borderColor = "red";
+    form.elements[10].style.borderColor = "red";
+
+    var blockNumber = form.elements[3].value;
+    var nonceVal = document.getElementById("nonce1").innerHTML;
+    var data = form.elements[4].value;
+    document.getElementById("currentHash1").innerHTML = "Live Hash is: " + SHA256(blockNumber.concat(nonceVal).concat(data));
+}
+
+function checkBlockChain2(){
+    var form = document.getElementById("form3");
+    form.elements[6].style.borderColor = "red";
+    form.elements[7].style.borderColor = "red";
+    form.elements[9].style.borderColor = "red";
+    form.elements[10].style.borderColor = "red";
+    var blockNumber = form.elements[6].value;
+    var nonceVal = document.getElementById("nonce2").innerHTML;
+    var data = form.elements[7].value;
+    document.getElementById("currentHash2").innerHTML = "Live Hash is: " + SHA256(blockNumber.concat(nonceVal).concat(data));
+}
+
+function checkBlockChain3(){
+    var form = document.getElementById("form3");
+    form.elements[9].style.borderColor = "red";
+    form.elements[10].style.borderColor = "red";
+    var blockNumber = form.elements[9].value;
+    var nonceVal = document.getElementById("nonce3").innerHTML;
+    var data = form.elements[10].value;
+    document.getElementById("currentHash3").innerHTML = "Live Hash is: " + SHA256(blockNumber.concat(nonceVal).concat(data));
+}
+
+
+
+function mine(id){
+    switch(id){
+        case "block0":
+            var formData = document.getElementById("form2");
+            var blockNumber = formData.elements[0].value;
+            var data = formData.elements[1].value;
+            var nonce = 0;
+            var returnVal = blockNumber.concat(nonce.toString()).concat(data);
+            returnVal = SHA256(returnVal);
+            while(returnVal.substring(0,4) != "0000"){
+                blockNumber = formData.elements[0].value;
+                returnVal = blockNumber.concat(nonce.toString()).concat(data);
+                returnVal = SHA256(returnVal);
+                nonce++;
+            }
+            document.getElementById("form2").elements[0].style.borderColor = "green";
+            document.getElementById("form2").elements[1].style.borderColor = "green";
+            document.getElementById("nonce").innerHTML = "Nonce Value is: " + (nonce - 1).toString();
+            document.getElementById("mined hash").innerHTML = returnVal;
+            break;
+
+        case "blockchain0":
+            var formData = document.getElementById("form3");
+            var blockNumber = formData.elements[0].value;
+            var data = formData.elements[1].value;
+            var nonce = 0;
+            var returnVal = blockNumber.concat(nonce.toString()).concat(data);
+            returnVal = SHA256(returnVal);
+            while(returnVal.substring(0,4) != "0000"){
+                blockNumber = formData.elements[0].value;
+                returnVal = blockNumber.concat(nonce.toString()).concat(data);
+                returnVal = SHA256(returnVal);
+                nonce++;
+            }
+            formData.elements[0].style.borderColor = "green";
+            formData.elements[1].style.borderColor = "green";
+            document.getElementById("hash0prev").innerHTML = "Previous hash is: 0000000000000000000000000000000000000000000000000000000000000000"
+            document.getElementById("nonce0").innerHTML = "Nonce Value is: " + (nonce - 1).toString();
+            document.getElementById("hash0").innerHTML = "Mined hash is: " + returnVal;
+            break;
+
+        case "blockchain1":
+            var formData = document.getElementById("form3");
+            var prevHash = document.getElementById("hash0").innerHTML.substring(15, document.getElementById("hash0").innerHTML.length);
+            var blockNumber = formData.elements[3].value;
+            var data = formData.elements[4].value;
+            var nonce = 0;
+            var returnVal = blockNumber.concat(prevHash).concat(nonce.toString()).concat(data);
+            var concatVal = returnVal;
+            returnVal = SHA256(returnVal);
+            while(returnVal.substring(0,4) != "0000"){
+                blockNumber = formData.elements[3].value;
+                returnVal = blockNumber.concat(prevHash).concat(nonce.toString()).concat(data);
+                returnVal = SHA256(returnVal);
+                nonce++;
+            }
+            formData.elements[3].style.borderColor = "green";
+            formData.elements[4].style.borderColor = "green";
+            document.getElementById("nonce1").innerHTML = "Nonce Value is: " + (nonce - 1).toString();
+            document.getElementById("hash1prev").innerHTML = "Previous hash is: " + prevHash; 
+            document.getElementById("hash1").innerHTML = "Mined hash is: " + returnVal;
+            break;     
+
+        case "blockchain2":
+            var formData = document.getElementById("form3");
+            var prevHash = document.getElementById("hash1").innerHTML.substring(15, document.getElementById("hash1").innerHTML.length);;
+            var blockNumber = formData.elements[6].value;
+            var data = formData.elements[7].value;
+            var nonce = 0;
+            var returnVal = blockNumber.concat(prevHash).concat(nonce.toString()).concat(data);
+            var concatVal = returnVal;
+            returnVal = SHA256(returnVal);
+            while(returnVal.substring(0,4) != "0000"){
+                blockNumber = formData.elements[6].value;
+                returnVal = blockNumber.concat(prevHash).concat(nonce.toString()).concat(data);
+                returnVal = SHA256(returnVal);
+                nonce++;
+            }
+            formData.elements[6].style.borderColor = "green";
+            formData.elements[7].style.borderColor = "green";
+            document.getElementById("nonce2").innerHTML = "Nonce Value is:" + (nonce - 1).toString();
+            document.getElementById("hash2prev").innerHTML = "Previous hash is: " + prevHash;
+            document.getElementById("hash2").innerHTML = "Mined hash is: " + returnVal;
+            break;    
+
+        case "blockchain3":
+            var formData = document.getElementById("form3");
+            var prevHash = document.getElementById("hash2").innerHTML.substring(15, document.getElementById("hash2").innerHTML.length);;
+            var blockNumber = formData.elements[9].value;
+            var data = formData.elements[10].value;
+            var nonce = 0;
+            var returnVal = blockNumber.concat(prevHash).concat(nonce.toString()).concat(data);
+            var concatVal = returnVal;
+            returnVal = SHA256(returnVal);
+            while(returnVal.substring(0,4) != "0000"){
+                blockNumber = formData.elements[9].value;
+                returnVal = blockNumber.concat(prevHash).concat(nonce.toString()).concat(data);
+                returnVal = SHA256(returnVal);
+                nonce++;
+            }
+            formData.elements[9].style.borderColor = "green";
+            formData.elements[10].style.borderColor = "green";
+            document.getElementById("nonce3").innerHTML = "Nonce Value is:" + (nonce - 1).toString();
+            document.getElementById("hash3prev").innerHTML = "Previous hash is: " + prevHash;
+            document.getElementById("hash3").innerHTML = "Mined hash is: " + returnVal;
+            break;     
+
+    }
+
+
 }

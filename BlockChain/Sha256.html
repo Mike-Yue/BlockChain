@@ -5,21 +5,134 @@
 	<title> Module 2 SHA256 Hashing </title>
 	<script src="hash.js"></script>
 	<script src="practice.js"></script>
+	<style>
+	#inputfields{
+		width: 100%;
+		padding: 12px 20px;
+		margin: 8px 0;
+		box-sizing: border-box;
+	}
+	textarea{
+		height: 200px;
+		width: 50%;
+		padding: 12px 20px;
+		box-sizing: border-box;
+		border-radius: 4px;
+		background-color: #f8f8f8;
+		resize: none;
+		border: 2px solid #ccc;
+		word-wrap: break-word;
+	}
+
+	.inline-div{
+		display: inline-block;
+		width: 100%;
+	}
+
+	.inline-txtarea{
+		resize: none;
+		height: 200px;
+		width: 100%;
+		align-self: flex-end;
+		vertical-align: top;
+	}
+
+	.inline-field{
+		resize: none;
+		vertical-align: top;
+	}
+
+
+	</style>
+
 </head>
 
 <body>
+	<h1> BlockChain Implementation</h1>
+	<ul>
+		<li><a href = "#sha256"> Hashing </a></li>
+		<li><a href = "#block">Block</a></li>
+		<li><a href = "#blockchain">BlockChain</a></li>
+	</ul>
+
 	<div id = "sha256">
-		<h1> SHA256 Hash</h1>
+		<h2> SHA256 Hash</h2>
 		<form id = "form1">
 			Input: <br>
-			<input type = "text"><br>
+			<textarea></textarea>
 		</form>
-		<p id = "hashed result">e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</p>
+		<p id = "hashed result"></p>
 		<button type = "button" onclick = "edit()">Hash!</button>
 	</div>
 
+	<div id = "block">
+		<h2> Block </h2>
+		<form id = "form2">
+			Block Number: <br>
+			<input type = "number" oninput = "checkBlockHash()"><br>
+			Block data: <br>
+			<textarea oninput = "checkBlockHash()"></textarea> <br>
+		</form>
+		<p id = "nonce"></p>
+		<p id = "mined hash"></p>
+		<button id = "block0" type = "button" onclick = "mine(this.id)">Mine!</button>
+	</div>
+
 	<div id = "blockchain">
-		<h1> BlockChain </h1>
+		<h2> BlockChain </h2>
+		<div id = "inputfields">
+			<form id = "form3">
+				<div class ="inline-div">
+					Block Number: 
+					<input type = "number" oninput = "checkBlockChain0()"> <br>
+					Block data:
+					<textarea class ="inline-txtarea" oninput = "checkBlockChain0()"></textarea>
+					<p class = "inline-field" id = "nonce0">Nonce Value is: 0</p>
+					<p class = "inline-field" id = "hash0prev"></p>
+					<p class = "inline-field" id = "currentHash0"></p>
+					<p class = "inline-field" id = "hash0"></p>
+					<button id = "blockchain0" type = "button" onclick = "mine(this.id)">Mine!</button>
+				</div>
+
+				<div class = "inline-div">
+					Block Number: 
+					<input type = "number" oninput = "checkBlockChain1()"> <br>
+					Block data: 
+					<textarea class = "inline-txtarea" oninput = "checkBlockChain1()"></textarea>
+					<p class = "inline-field" id = "nonce1">Nonce Value is: 0</p>
+					<p class = "inline-field" id = "hash1prev"></p>
+					<p class = "inline-field" id = "currentHash1" oninput = "calculateHash(this.id)"></p>
+					<p class = "inline-field" id = "hash1"></p>
+					<button id = "blockchain1" type = "button" onclick = "mine(this.id)">Mine!</button>
+				</div>
+
+				<div class = "inline-div">
+					Block Number: 
+					<input type = "number" oninput = "checkBlockChain2()"> <br>
+					Block data: 
+					<textarea class = "inline-txtarea" oninput = "checkBlockChain2()"></textarea>
+					<p class = "inline-field" id = "nonce2">Nonce Value is: 0</p>
+					<p class = "inline-field" id = "hash2prev"></p>
+					<p class = "inline-field" id = "currentHash2" oninput = "calculateHash(this.id)"></p>
+					<p class = "inline-field" id = "hash2"></p>
+					<button id = "blockchain2" type = "button" onclick = "mine(this.id)">Mine!</button>
+				</div>
+
+				<div class = "inline-div">
+					Block Number: 
+					<input type = "number" oninput = "checkBlockChain3()"> <br>
+					Block data: 
+					<textarea class = "inline-txtarea" oninput = "checkBlockChain3()"></textarea>
+					<p class = "inline-field" id = "nonce3">Nonce Value is: 0</p>
+					<p class = "inline-field" id = "hash3prev"></p>
+					<p class = "inline-field" id = "currentHash3" oninput = "calculateHash(this.id)"></p>
+					<p class = "inline-field" id = "hash3"></p>
+					<button id = "blockchain3" type = "button" onclick = "mine(this.id)">Mine!</button>
+				</div>
+
+			</form>
+		</div>
+
 	</div>
 
 </body>
